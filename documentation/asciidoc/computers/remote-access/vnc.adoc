@@ -75,18 +75,17 @@ Cloud connections are convenient and encrypted end-to-end. They are highly recom
 
 ==== Authenticating to VNC Server
 
-To complete either a direct or cloud connection, you must authenticate to VNC Server.
+NOTE: This section is only relevant if you're using a Raspberry Pi device older than Raspberry Pi 4, Compute Module 4, or Raspberry Pi 400.
 
-If you're connecting from the https://www.realvnc.com/download/viewer/[compatible VNC Viewer app] from RealVNC, enter the user name and password you normally use to log in to your user account on the Raspberry Pi. By default, these credentials are `pi` and `raspberry`.
+If you're connecting from a non-RealVNC Viewer app, you need to downgrade VNC Server's authentication scheme, specify a password unique to VNC Server, and then use that password to authenticate.
 
-If you're connecting from a non-RealVNC Viewer app, you'll first need to downgrade VNC Server's authentication scheme, specify a password unique to VNC Server, and then enter that instead.
+If you're using a desktop environment, open the VNC Server on your Raspberry Pi, select menu:Menu[Options > Security], and choose *VNC password* from the *Authentication* dropdown.
 
-* If you are in front of your Raspberry Pi and can see its screen, open the VNC Server dialog on your Raspberry Pi, select menu:Menu[Options > Security], and choose *VNC password* from the *Authentication* dropdown.
-* *Or* if you're configuring your Raspberry Pi remotely from the command line, then to make the changes for Service Mode (the default configuration for the Raspberry Pi):
- ** Open the `/root/.vnc/config.d/vncserver-x11` config file.
- ** Replace `Authentication=SystemAuth` with `Authentication=VncAuth` and save the file.
- ** In the command line, run `sudo vncpasswd -service`. This  will prompt you to set a password, and will insert it for you in the right config file for VNC Server running in Service Mode.
- ** Restart VNC Server.
+If you're configuring a headless device, follow these steps:
+ 1. Open the config file in `/root/.vnc/config.d/vncserver-x11`.
+ 2. Replace `Authentication=SystemAuth` with `Authentication=VncAuth` and save the file.
+ 3. From the command line, run `sudo vncpasswd -service`. This will prompt you to set a password, and will insert that password in the config file for VNC Server running in Service Mode.
+ 4. Restart VNC Server.
 
 === Using Directly Rendered Applications
 
